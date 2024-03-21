@@ -3,7 +3,6 @@ package com.example.githubuser.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,7 +11,6 @@ import com.example.githubuser.data.response.GithubUserResponse
 import com.example.githubuser.data.response.ItemsItem
 import com.example.githubuser.data.retrofit.ApiConfig
 import com.example.githubuser.databinding.ActivityMainBinding
-import com.google.android.material.search.SearchBar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,37 +41,49 @@ class MainActivity : AppCompatActivity() {
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
+            searchView.setupWithSearchBar(searchBar)
             searchView
                 .editText
                 .setOnEditorActionListener { textView, actionId, event ->
                     searchBar.setText(searchView.text)
                     searchView.hide()
                     viewModel.findUsersGithub(searchView.text.toString())
-                    viewModel.listUser.observe(this@MainActivity)  {
-                        if (it.isNullOrEmpty()) {
-                            searchUser(false)
-
-                        } else {
-                            searchUser(true)
-                        }
-                    }
                     false
                 }
+            viewModel.isLoading.observe(this@MainActivity) { isLoading ->
+                showLoading(isLoading)
             }
-            viewModel.isLoading.observe(this) {
-                showLoading(it)
+            viewModel.listUser.observe(this@MainActivity) {items ->
+                setDataUser(items)
+                searchUser(!items.isNullOrEmpty())
             }
+        }
+        /**
+        with(binding) {
+        searchView.setupWithSearchBar(searchBar)
+        searchView
+        .editText
+        .setOnEditorActionListener { textView, actionId, event ->
+        searchBar.setText(searchView.text)
+        searchView.hide()
+        viewModel.findUsersGithub(searchView.text.toString())
+        viewModel.listUser.observe(this@MainActivity)  {
+        if (it.isNullOrEmpty()) {
+        searchUser(false)
+
+        } else {
+        searchUser(true)
+        }
+        }
+        false
+        }
+        }
+         **/
         }
 
 
     private fun searchUser(found: Boolean) {
-        binding.apply {
-            if (found) {
-                rvData.visibility = View.VISIBLE
-            }else {
-                rvData.visibility = View.GONE
-            }
-        }
+        binding.rvData.visibility = if (found) View.VISIBLE else View.GONE
     }
 
 
@@ -111,10 +121,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading : Boolean) {
         if (isLoading) {
-            binding.progressBar.visibility = View.INVISIBLE
+            binding.progressBar.visibility = View.VISIBLE
         } else {
             binding.progressBar.visibility = View.GONE
         }
 
     }
+
 }
