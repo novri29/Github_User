@@ -1,5 +1,6 @@
 package com.example.githubuser.ui
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -25,13 +26,19 @@ class UserAdapter : ListAdapter<ItemsItem, UserAdapter.MyViewHolder>(DIFF_CALLBA
     class MyViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: ItemsItem) {
             with(binding) {
-                Glide.with(tvUserProfile)
+                Glide.with(ivUserProfile)
                     .load(item.avatarUrl)
                     .fitCenter()
-                    .into(tvUserProfile)
+                    .into(ivUserProfile)
                 tvUsername.text = item.login
             }
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailUserActivity::class.java)
+                intent.putExtra(DetailUserActivity.EXTRA_USER, item.login)
+                itemView.context.startActivity(intent)
+            }
         }
+
     }
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ItemsItem>() {

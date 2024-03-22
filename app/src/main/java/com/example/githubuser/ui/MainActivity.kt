@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.githubuser.model.MainViewModel
 import com.example.githubuser.data.response.GithubUserResponse
 import com.example.githubuser.data.response.ItemsItem
 import com.example.githubuser.data.retrofit.ApiConfig
@@ -21,8 +22,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-        private const val USER_ID ="hello"
+        private const val USER_ID ="Novri29"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -34,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvData.layoutManager = layoutManager
 
         binding.rvData.layoutManager = layoutManager
-        val itemDecoration = DividerItemDecoration(this,layoutManager.orientation)
+        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvData.addItemDecoration(itemDecoration)
 
         findUser()
@@ -53,11 +55,12 @@ class MainActivity : AppCompatActivity() {
             viewModel.isLoading.observe(this@MainActivity) { isLoading ->
                 showLoading(isLoading)
             }
-            viewModel.listUser.observe(this@MainActivity) {items ->
+            viewModel.listUser.observe(this@MainActivity) { items ->
                 setDataUser(items)
                 searchUser(!items.isNullOrEmpty())
             }
         }
+    }
         /**
         with(binding) {
         searchView.setupWithSearchBar(searchBar)
@@ -79,8 +82,6 @@ class MainActivity : AppCompatActivity() {
         }
         }
          **/
-        }
-
 
     private fun searchUser(found: Boolean) {
         binding.rvData.visibility = if (found) View.VISIBLE else View.GONE
