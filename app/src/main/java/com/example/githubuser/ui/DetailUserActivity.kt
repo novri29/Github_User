@@ -29,27 +29,12 @@ class DetailUserActivity : AppCompatActivity() {
         private val TAB_TITLES = intArrayOf(R.string.Followers, R.string.Following)
         const val EXTRA_USER = "EXTRA_USER"
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.profile_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.profile -> {
-                // KLIK
-                val intent = Intent(this, profileActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val detailUser = intent.getStringExtra("EXTRA_USER")
         //ViewPager
