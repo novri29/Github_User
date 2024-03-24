@@ -28,7 +28,7 @@ class UserAdapter : ListAdapter<ItemsItem, UserAdapter.MyViewHolder>(DIFF_CALLBA
             with(binding) {
                 Glide.with(ivUserProfile)
                     .load(item.avatarUrl)
-                    .fitCenter()
+                    .circleCrop()
                     .into(ivUserProfile)
                 tvUsername.text = item.login
             }

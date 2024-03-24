@@ -60,4 +60,10 @@ dependencies {
 
     //KTX
     implementation("androidx.activity:activity-ktx:1.3.1")
+    implementation ("androidx.fragment:fragment-ktx:1.3.1")
+
+
+    //ViewPager
+    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 }

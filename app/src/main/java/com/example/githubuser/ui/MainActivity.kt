@@ -1,12 +1,16 @@
 package com.example.githubuser.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.githubuser.R
 import com.example.githubuser.model.MainViewModel
 import com.example.githubuser.data.response.GithubUserResponse
 import com.example.githubuser.data.response.ItemsItem
@@ -25,12 +29,15 @@ class MainActivity : AppCompatActivity() {
         private const val USER_ID ="Novri29"
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.profile_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        supportActionBar?.hide()
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvData.layoutManager = layoutManager

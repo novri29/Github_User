@@ -1,10 +1,14 @@
 package com.example.githubuser.model
 
+import android.content.ClipData.Item
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.githubuser.R
 import com.example.githubuser.data.response.DetailUserResponse
+import com.example.githubuser.data.response.ItemsItem
 import com.example.githubuser.data.retrofit.ApiConfig
 import com.example.githubuser.ui.DetailUserActivity
 import retrofit2.Call
@@ -22,6 +26,7 @@ class DetailViewModel : ViewModel() {
 
     private val _detailUser = MutableLiveData<DetailUserResponse>()
     val detailUser: LiveData<DetailUserResponse> = _detailUser
+
 
     fun detailUserGithub(username : String) {
         _isLoading.value = true
