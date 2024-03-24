@@ -51,7 +51,9 @@ class DetailUserActivity : AppCompatActivity() {
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sectionPagerAdapter = SectionPagerAdapter(this)
+        val detailUser = intent.getStringExtra("EXTRA_USER")
+        //ViewPager
+        val sectionPagerAdapter = detailUser?.let {SectionPagerAdapter(this, it)}
         val viewPager: ViewPager2 = findViewById(R.id.view_pager)
         viewPager.adapter = sectionPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
@@ -61,7 +63,6 @@ class DetailUserActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
 
-        val detailUser = intent.getStringExtra("EXTRA_USER")
         if (detailUser != null){
             viewModel.detailUserGithub(detailUser)
 
@@ -73,6 +74,7 @@ class DetailUserActivity : AppCompatActivity() {
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
         }
+
     }
 
     private fun showLoading(isLoading : Boolean) {
@@ -84,6 +86,7 @@ class DetailUserActivity : AppCompatActivity() {
 
     }
 
+    //DetailUser
     private fun setDetailUser(item: DetailUserResponse){
         binding.apply {
             tvNameuser.text = item.name

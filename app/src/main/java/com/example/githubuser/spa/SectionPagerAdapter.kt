@@ -3,10 +3,7 @@ package com.example.githubuser.spa
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.githubuser.data.response.DetailUserResponse
-import com.example.githubuser.data.response.ItemsItem
 import com.example.githubuser.ui.FollowFragment
 
 class SectionPagerAdapter(activity: AppCompatActivity,

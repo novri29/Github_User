@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-        private const val USER_ID ="Novri29"
+        private const val USER_ID ="Novri"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
