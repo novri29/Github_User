@@ -8,6 +8,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
@@ -16,6 +18,9 @@ import com.example.githubuser.data.response.GithubUserResponse
 import com.example.githubuser.data.response.ItemsItem
 import com.example.githubuser.data.retrofit.ApiConfig
 import com.example.githubuser.databinding.ActivityMainBinding
+import com.example.githubuser.model.SettingViewModel
+import com.example.githubuser.model.ViewModelFactory
+import com.google.android.material.switchmaterial.SwitchMaterial
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,15 +35,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.profile_menu, menu)
+        menuInflater.inflate(R.menu.setting_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.profile -> {
-                // KLIK ke Menu Profile
-                val intent = Intent(this, profileActivity::class.java)
+            R.id.setting -> {
+                // KLIK ke Menu Setting
+                val intent = Intent(this, SettingActivity::class.java)
                 startActivity(intent)
                 return true
             }
@@ -77,6 +82,18 @@ class MainActivity : AppCompatActivity() {
             viewModel.listUser.observe(this@MainActivity) { items ->
                 setDataUser(items)
                 searchUser(!items.isNullOrEmpty())
+            }
+        }
+        val pref = SettingPreference.getInstance(application.dataStore)
+        val mainViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+            SettingViewModel::class.java
+        )
+
+        mainViewModel.getThemeSettings().observe(this) { isDarkModeActive : Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
     }

@@ -13,13 +13,15 @@ class ApiConfig {
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build()
+            /**
             val authInterceptor = Interceptor { chain ->
-                val req = chain.request()
-                val requestHeaders = req.newBuilder()
-                    .addHeader("Authorization", "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")
-                    .build()
-                chain.proceed(requestHeaders)
+            val req = chain.request()
+            val requestHeaders = req.newBuilder()
+            .addHeader("Authorization", "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")
+            .build()
+            chain.proceed(requestHeaders)
             }
+             **/
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
