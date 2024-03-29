@@ -1,8 +1,10 @@
 package com.example.githubuser.model
 
+import android.app.Application
 import android.content.ClipData.Item
 import android.util.Log
 import androidx.annotation.StringRes
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,12 +12,14 @@ import com.example.githubuser.R
 import com.example.githubuser.data.response.DetailUserResponse
 import com.example.githubuser.data.response.ItemsItem
 import com.example.githubuser.data.retrofit.ApiConfig
+import com.example.githubuser.database.Favorite
+import com.example.githubuser.repo.FavoriteRepo
 import com.example.githubuser.ui.DetailUserActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(application: Application) : AndroidViewModel(application) {
 
     companion object {
         private const val TAG = "DetailViewModel"
@@ -27,7 +31,7 @@ class DetailViewModel : ViewModel() {
     private val _detailUser = MutableLiveData<DetailUserResponse>()
     val detailUser: LiveData<DetailUserResponse> = _detailUser
 
-
+    private val favoriteRepo : FavoriteRepo = FavoriteRepo(application)
     fun detailUserGithub(username : String) {
         _isLoading.value = true
         val client = ApiConfig.getApiService().getUsername(username)
@@ -51,6 +55,14 @@ class DetailViewModel : ViewModel() {
 
         })
 
+    }
+    fun insert(favorite: Favorite) {
+        favoriteRepo.insert(favorite)
+    }
+    fun checkFavorite(login: String) : LiveData<Boolean> = favoriteRepo.checkFavorite(login)
+
+    fun delete(favorite: Favorite) {
+        favoriteRepo.delete(favorite)
     }
 }
 

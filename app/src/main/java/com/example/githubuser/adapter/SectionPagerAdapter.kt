@@ -1,4 +1,4 @@
-package com.example.githubuser.spa
+package com.example.githubuser.adapter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

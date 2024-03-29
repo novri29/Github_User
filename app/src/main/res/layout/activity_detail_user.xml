@@ -25,7 +25,6 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_marginTop="12dp"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/iv_image"
         app:layout_constraintStart_toStartOf="@+id/iv_image"
         app:layout_constraintTop_toBottomOf="@+id/iv_image" />
@@ -49,6 +48,8 @@
         app:layout_constraintStart_toStartOf="@+id/tv_username"
         app:layout_constraintTop_toBottomOf="@+id/tv_username"
         tools:text="Bio" />
+
+
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -80,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
-            tools:text="Followers"
+            tools:text="@string/Followers"
             android:textAlignment="center"
             android:textStyle="bold"/>
 
@@ -90,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            tools:text="Following"
+            tools:text="@string/Following"
             android:textAlignment="center"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -113,6 +114,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabs" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/iv_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/save_favorite"
+        android:src="@drawable/baseline_favorite_border_24"
+        android:tag="Not Saved"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/view_pager"
+        android:layout_margin="30dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
