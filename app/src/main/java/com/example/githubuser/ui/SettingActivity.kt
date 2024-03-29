@@ -2,15 +2,12 @@ package com.example.githubuser.ui
 
 import android.os.Bundle
 import android.widget.CompoundButton
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.R
 import com.example.githubuser.model.SettingViewModel
-import com.example.githubuser.model.ViewModelFactory
+import com.example.githubuser.model.SettingViewModelFactory
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingActivity : AppCompatActivity() {
@@ -21,7 +18,7 @@ class SettingActivity : AppCompatActivity() {
         val switchTheme = findViewById<SwitchMaterial>(R.id.switch_theme)
 
         val pref = SettingPreference.getInstance(application.dataStore)
-        val mainViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+        val mainViewModel = ViewModelProvider(this, SettingViewModelFactory(pref)).get(
             SettingViewModel::class.java
         )
 

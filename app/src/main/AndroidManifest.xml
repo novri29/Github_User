@@ -16,18 +16,19 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.FavoriteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Favorite"
+            android:parentActivityName=".ui.MainActivity"/>
         <activity
             android:name=".ui.SettingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.profileActivity"
             android:exported="false"
-            android:parentActivityName=".ui.MainActivity" />
+            android:parentActivityName=".ui.MainActivity"
+            android:label="Setting"/>
         <activity
             android:name=".ui.DetailUserActivity"
             android:exported="false"
-            android:parentActivityName=".ui.MainActivity" />
+            android:parentActivityName=".ui.MainActivity"
+            android:label="Detail User"/>
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

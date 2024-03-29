@@ -24,7 +24,6 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
     companion object {
         private const val TAG = "DetailViewModel"
     }
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
 

@@ -16,8 +16,6 @@ class MainViewModel : ViewModel()  {
         private const val TAG = "MainActivity"
     }
 
-
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
 

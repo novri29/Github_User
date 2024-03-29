@@ -83,7 +83,7 @@
             android:layout_marginEnd="30dp"
             tools:text="@string/Followers"
             android:textAlignment="center"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <!--Follwoing -->
         <TextView
@@ -93,7 +93,7 @@
             android:layout_marginStart="30dp"
             tools:text="@string/Following"
             android:textAlignment="center"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
@@ -103,8 +103,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:tabTextColor="@android:color/black" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"

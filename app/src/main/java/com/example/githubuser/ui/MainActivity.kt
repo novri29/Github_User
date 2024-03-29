@@ -19,8 +19,7 @@ import com.example.githubuser.data.response.ItemsItem
 import com.example.githubuser.data.retrofit.ApiConfig
 import com.example.githubuser.databinding.ActivityMainBinding
 import com.example.githubuser.model.SettingViewModel
-import com.example.githubuser.model.ViewModelFactory
-import com.google.android.material.switchmaterial.SwitchMaterial
+import com.example.githubuser.model.SettingViewModelFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,6 +43,11 @@ class MainActivity : AppCompatActivity() {
             R.id.setting -> {
                 // KLIK ke Menu Setting
                 val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.favorite -> {
+                val intent = Intent(this, FavoriteActivity::class.java)
                 startActivity(intent)
                 return true
             }
@@ -85,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         val pref = SettingPreference.getInstance(application.dataStore)
-        val mainViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+        val mainViewModel = ViewModelProvider(this, SettingViewModelFactory(pref)).get(
             SettingViewModel::class.java
         )
 

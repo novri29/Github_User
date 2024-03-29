@@ -1,15 +1,31 @@
 package com.example.githubuser.model
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.ui.SettingPreference
 
-class ViewModelFactory(private val pref: SettingPreference) : ViewModelProvider.NewInstanceFactory() {
+
+class ViewModelFactory(private val mApplication: Application) : ViewModelProvider.Factory {
+
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(SettingViewModel::class.java)) {
-            return SettingViewModel(pref) as T
+        if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)) {
+            return FavoriteViewModel(mApplication) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel Class: " + modelClass.name)
+        throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }
+    companion object {
+        @Volatile
+        private var INSTANCE : ViewModelFactory? = null
+
+        fun getInstance(application: Application) : ViewModelFactory {
+            if(INSTANCE == null) {
+                synchronized(ViewModelFactory::class.java) {
+                    INSTANCE = ViewModelFactory(application)
+                }
+            }
+            return INSTANCE as ViewModelFactory
+        }
+    }
+
 }

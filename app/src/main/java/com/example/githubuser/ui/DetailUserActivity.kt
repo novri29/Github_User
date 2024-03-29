@@ -24,8 +24,6 @@ class DetailUserActivity : AppCompatActivity() {
     private lateinit var viewModel: DetailViewModel
     private lateinit var favoriteUser: Favorite
 
-
-
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(R.string.Followers, R.string.Following)
@@ -38,27 +36,31 @@ class DetailUserActivity : AppCompatActivity() {
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val detailUser = intent.getStringExtra("EXTRA_USER")
+
         //ViewPager
-        val sectionPagerAdapter = detailUser?.let {SectionPagerAdapter(this, it)}
+        val sectionPagerAdapter = detailUser?.let { SectionPagerAdapter(this, it) }
         val viewPager: ViewPager2 = findViewById(R.id.view_pager)
         viewPager.adapter = sectionPagerAdapter
+
         val tabs: TabLayout = findViewById(R.id.tabs)
-        TabLayoutMediator(tabs,viewPager) {
-                tab, position -> tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
+        sectionPagerAdapter?.let {
+            TabLayoutMediator(tabs, viewPager) { tab, position ->
+                tab.text = resources.getString(TAB_TITLES[position])
+            }.attach()
+        }
 
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        if (detailUser != null){
-            viewModel.detailUserGithub(detailUser)
-
+        detailUser?.let {
+            viewModel.detailUserGithub(it)
         }
 
         viewModel.detailUser.observe(this) { item ->
             setDetailUser(item)
         }
+
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
         }

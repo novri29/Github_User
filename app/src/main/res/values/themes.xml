@@ -3,11 +3,11 @@
     <style name="Base.Theme.GitHubUser" parent="Theme.Material3.DayNight">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">#A6A6A6</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">#2F3C7E</item>
+        <item name="colorOnPrimary">#FBEAEB</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/orange_light</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorOnSecondary">#2F3C7E</item>
     </style>
 
     <style name="Theme.GitHubUser" parent="Base.Theme.GitHubUser" />
