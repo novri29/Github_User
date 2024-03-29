@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.setting_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.setting -> {
@@ -55,10 +54,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //supportActionBar?.hide()
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvData.layoutManager = layoutManager

@@ -1,7 +1,10 @@
 package com.example.githubuser.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -65,6 +68,21 @@ class DetailUserActivity : AppCompatActivity() {
             showLoading(isLoading)
         }
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.setting_solo, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.setting -> {
+                // KLIK ke Menu Setting
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     private fun showLoading(isLoading : Boolean) {
         if (isLoading) {
@@ -89,7 +107,7 @@ class DetailUserActivity : AppCompatActivity() {
                 .into(ivImage)
         }
         favoriteUser = Favorite(item.login ?: "", item.avatarUrl ?: "")
-        viewModel.checkFavorite(favoriteUser.login ?: "").observe(this) { fav1 ->
+        viewModel.checkFavorite(favoriteUser.login).observe(this) { fav1 ->
             setFavorite(fav1)
         }
         binding.ivFavorite.apply {

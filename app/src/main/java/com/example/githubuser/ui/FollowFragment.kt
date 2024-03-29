@@ -17,7 +17,6 @@ class FollowFragment : Fragment() {
 
     private lateinit var _binding : FragmentFollowBinding
     private val viewModel by viewModels<FollowViewModel>()
-    private var adapter = UserAdapter()
 
     companion object {
         const val ARG_SECTION_NUMBER = "section_number"

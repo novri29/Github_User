@@ -13,8 +13,7 @@ import com.example.githubuser.database.Favorite
 import com.example.githubuser.databinding.ItemUserBinding
 import com.example.githubuser.ui.DetailUserActivity
 
-class AdapterFavorite(private val onItemClick: OnClickListener?) :
-    RecyclerView.Adapter<AdapterFavorite.FavoriteViewHolder>() {
+class AdapterFavorite(private val onItemClick: OnClickListener?) : RecyclerView.Adapter<AdapterFavorite.FavoriteViewHolder>() {
 
     private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Favorite>() {
         override fun areItemsTheSame(oldItem: Favorite, newItem: Favorite): Boolean {
